@@ -3,18 +3,45 @@
   "version": "0.0.1",
   "description": "A treesitter grammar for GraphQL",
   "main": "bindings/node",
+  "types": "bindings/node",
   "author": "Bryan Kegley <hi@bryankegley.me>",
   "license": "MIT",
   "scripts": {
     "generate": "tree-sitter generate",
-    "test": "tree-sitter test"
+    "test": "tree-sitter test",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
   },
   "dependencies": {
-    "nan": "^2.14.2"
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "node-gyp": "^7.1.2",
     "prettier": "^2.1.2",
-    "tree-sitter-cli": "^0.19.3"
-  }
+    "tree-sitter-cli": "^0.19.3",
+    "prebuildify": "^6.0.0"
+  },
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
+  ],
+  "tree-sitter": [
+    {
+      "scope": "source.graphql",
+      "injection-regex": "^graphql$"
+    }
+  ]
 }
